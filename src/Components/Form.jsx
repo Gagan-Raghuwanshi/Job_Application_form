@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { MdDriveFolderUpload } from "react-icons/md";
 
 function Form() {
-    const submitform = (e)=>{
-        e.preventDefault();
-        alert("Your Application Submitted ! successfully")
-    }
-
-    const [file,setFile] = useState();
-  let uploadfile = (e) => {
-    setFile(e.target.files[0])
-    console.log("file uploaded")
+  const submitform = (e) => {
+    alert("Your Application Submitted ! successfully");
   };
+
+  const [file, setFile] = useState();
+  let uploadfile = (e) => {
+    setFile(e.target.files[0]);
+    console.log("file uploaded");
+  };
+
   return (
     <div className="border-2 w-[90%]  m-auto shadow-2xl mt-4">
       <h1 className="text-center text-3xl font-bold m-auto mt-4">
@@ -69,15 +69,17 @@ function Form() {
             className="border-2 mt-2 w-full outline-none p-1 px-3 items-center rounded-md"
           />
         </div>
-        <div
-          className=" border-2 max-w-max mt-7 flex flex-col items-center p-2 rounded-md cursor-pointer"
-          onClick={uploadfile}
-        >
-          <MdDriveFolderUpload className=" w-32 h-10" />
-          <label htmlFor="" className=" cursor-pointer font-semibold">
-            Upload Resume
-          </label>
+        <div className="font-semibold mt-7">
+                Upload Resume :
         </div>
+
+        <div className="flex items-center mt-2">
+              <MdDriveFolderUpload className="h-7 w-8" />
+            <div className=" w-max min-h-max  border-2">
+            <input type="file"/>
+            </div>
+        </div>
+
         <div className="mt-4">
           <label htmlFor="" className="font-semibold">
             Cover Letter :
