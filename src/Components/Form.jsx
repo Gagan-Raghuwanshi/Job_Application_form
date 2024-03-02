@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import { MdDriveFolderUpload } from "react-icons/md";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Form() {
-  const submitform = (e) => {
-    alert("Your Application Submitted ! successfully");
-  };
 
-  const [file, setFile] = useState();
-  let uploadfile = (e) => {
-    setFile(e.target.files[0]);
-    console.log("file uploaded");
-  };
+  let navigate = useNavigate();
+  const [formdata,setFormdata] = useState({
+    fname:'',
+    mname:'',
+    lname:'',
+    number:'',
+    email:'',
+    file:'',
+    cletter:''
+  })
+
+  const onchange = (e)=>{
+      setFormdata(()=>({
+        ...formdata,
+        [e.target.name]: e.target.value 
+      }))
+  }
+  const submit = ()=>{
+    navigate('/preview')
+    console.table(formdata)
+  }
 
   return (
     <div className="border-2 w-[90%]  m-auto shadow-2xl mt-4">
@@ -22,10 +36,12 @@ function Form() {
         <div className="">
           <label htmlFor="" className="font-semibold">
             First Name :
-          </label>{" "}
+          </label>
           <br />
           <input
             type="text"
+            name="fname"
+            onChange={onchange}
             className="border-2 mt-2 w-full outline-none p-1 px-3 items-center rounded-md"
           />
         </div>
@@ -36,6 +52,8 @@ function Form() {
           <br />
           <input
             type="text"
+            name="mname"
+            onChange={onchange}
             className="border-2 mt-2 w-full outline-none p-1 px-3 items-center rounded-md"
           />
         </div>
@@ -46,6 +64,8 @@ function Form() {
           <br />
           <input
             type="text"
+            name="lname"
+            onChange={onchange}
             className="border-2 mt-2 w-full outline-none p-1 px-3 items-center rounded-md"
           />
         </div>
@@ -56,6 +76,8 @@ function Form() {
           <br />
           <input
             type="number"
+            name="number"
+            onChange={onchange}
             className="border-2 mt-2 w-full outline-none p-1 px-3 items-center rounded-md"
           />
         </div>
@@ -66,18 +88,18 @@ function Form() {
           <br />
           <input
             type="email"
+            name="email"
+            onChange={onchange}
             className="border-2 mt-2 w-full outline-none p-1 px-3 items-center rounded-md"
           />
         </div>
-        <div className="font-semibold mt-7">
-                Upload Resume :
-        </div>
+        <div className="font-semibold mt-7">Upload Resume :</div>
 
         <div className="flex items-center mt-2">
-              <MdDriveFolderUpload className="h-7 w-8" />
-            <div className=" w-max min-h-max  border-2">
-            <input type="file"/>
-            </div>
+          <MdDriveFolderUpload className="h-7 w-8" />
+          <div className=" w-max min-h-max  border-2">
+            <input type="file" files="file" onChange={onchange}/>
+          </div>
         </div>
 
         <div className="mt-4">
@@ -89,6 +111,8 @@ function Form() {
             cols="50"
             rows="5"
             placeholder="Write Here"
+            name="cletter"
+            onChange={onchange}
             className=" border-2 outline-none w-full p-3 px-5 rounded-md"
           ></textarea>
         </div>
@@ -96,8 +120,8 @@ function Form() {
           <input
             type="submit"
             value="Submit"
+            onClick={submit}
             className=" bg-blue-700 text-white px-5 text-lg m-2 rounded-full cursor-pointer p-1"
-            onClick={submitform}
           />
         </div>
       </div>
